@@ -1,0 +1,30 @@
+{
+  "name": "pokemon",
+  "version": "1.0.0",
+  "description": "Pokemon Project",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aishwaryam1202/Pokemon.git"
+  },
+  "keywords": [
+    "pokemon"
+  ],
+  "author": "aishwarya manoharan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aishwaryam1202/Pokemon/issues"
+  },
+  "homepage": "https://github.com/aishwaryam1202/Pokemon#readme",
+  "dependencies": {
+    "parcel": "^2.13.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "process": "^0.11.10"
+  }
+}
