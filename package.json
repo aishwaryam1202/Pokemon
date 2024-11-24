@@ -1,9 +1,14 @@
 {
+  "homepage": "https://aishwaryam1202.github.io/Pokemon/",
   "name": "pokemon",
   "version": "1.0.0",
   "description": "Pokemon Project",
-  "main": "App.js",
   "scripts": {
+    "start": "parcel index.html",
+    "deploy": "npm run build && gh-pages -d dist",
+    "predeploy": "npm run build",
+    "build": "parcel build index.html",
+    "https-start": "parcel index.html --https",
     "test": "jest"
   },
   "repository": {
@@ -18,13 +23,13 @@
   "bugs": {
     "url": "https://github.com/aishwaryam1202/Pokemon/issues"
   },
-  "homepage": "https://github.com/aishwaryam1202/Pokemon#readme",
   "dependencies": {
     "parcel": "^2.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "gh-pages": "^6.2.0",
     "process": "^0.11.10"
   }
 }
