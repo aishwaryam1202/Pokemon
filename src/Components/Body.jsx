@@ -33,10 +33,7 @@ const Body = () => {
       );
 
       const results = await Promise.all(fetchPromises);
-      console.log("results: ", results);
 
-
-      console.log("Results from all URLs:", results);
       return results;
     } catch (error) {
       console.error("Error:", error);
@@ -47,7 +44,6 @@ const Body = () => {
     const callFetchUserDetails = async () => {
       const results = await fetchUserDetails();
       setPokemonList(results);
-      console.log("Fetched results:", results);
     };
 
     callFetchUserDetails();
@@ -86,7 +82,7 @@ const Body = () => {
       <PokemonCard key={item.name} pokemonData={item} />
     ));
   };
-  console.log(pokemonList);
+
   return (
     <div className="body-container">
       <div className="DropDown-Bar">

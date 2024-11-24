@@ -5,9 +5,9 @@
   "description": "Pokemon Project",
   "scripts": {
     "start": "parcel index.html",
-    "deploy": "npm run build && gh-pages -d dist",
+    "deploy": "rm -rf dist/ && npm run build && gh-pages -d dist",
     "predeploy": "npm run build",
-    "build": "parcel build index.html",
+    "build": "parcel build index.html --public-url ./",
     "https-start": "parcel index.html --https",
     "test": "jest"
   },
