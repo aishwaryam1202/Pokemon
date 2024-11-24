@@ -1,7 +1,13 @@
+.body-container {
+  font-family: 'Pokemon Solid', sans-serif;
+  font-weight: 400;
+}
+
 .pokemon-list-container {
   padding: 10px;
-  background-color: lightgray;
+  background-color: #314694;
   margin: 0px 107px;
+  border-radius: 10px;
 }
 
 .DropDown-Bar {
@@ -11,16 +17,28 @@
   display: flex;
   gap: 30px;
   height: max-content;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.visible-pokemon {
-  cursor: pointer;
-  font-size: 50px;
+.DropDown-Bar .filter-btn {
+    cursor: pointer;
+    margin: 10px 20px;
+    padding: 10px;
+    font-family: 'Pokemon Solid', sans-serif;
+    background: #f5ce18;
 }
 
-.DropDown-Bar .favourite-btn {
-  cursor: pointer;
-  margin: 10px 20px;
-  padding: 10px;
+.select-pokemon {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 100px;
+  }
+
+.select-pokemon  .selection{
+    width: 70%;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 10px;
 }

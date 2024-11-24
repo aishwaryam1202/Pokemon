@@ -12,8 +12,20 @@ import { useState, useEffect } from "react";
  * * * Pokemon Card 1
  * * * Pokemon Card 1
  */
+
+/**
+ * show-one
+ * show-all
+ * favourites
+ * 
+ */
+
 const Body = () => {
   const [pokemonList, setPokemonList] = useState([]);
+  const [pokemonURLList, setPokemonURLList] = useState([])
+  const [filteredPokemonList, setFilteredPokemonList] = useState([]);
+  const [activePokemonData, setActivePokemonData] = useState("");
+  const [filterView, setFilterView] = useState("show-one");
 
   const fetchUserDetails = async () => {
     try {
@@ -22,6 +34,7 @@ const Body = () => {
         throw new Error("Failed to fetch URLs");
       }
       const urls = await urlsResponse.json();
+      setPokemonURLList(urls.results);
 
       const fetchPromises = urls.results.map(({ url }) =>
         fetch(url).then((response) => {
@@ -44,54 +57,107 @@ const Body = () => {
     const callFetchUserDetails = async () => {
       const results = await fetchUserDetails();
       setPokemonList(results);
+      setFilteredPokemonList(results);
     };
 
     callFetchUserDetails();
   }, []);
 
-  const getDropDownBar1 = () => {
-    return <div className="visible-pokemon">All Pokemons</div>;
+  const onFavouriteButtonClicked = () => {
+    const favouritePokemonList = pokemonList.slice(0,2 );
+    setFilterView("favourites");
+    setFilteredPokemonList(favouritePokemonList);
   };
 
-  const getDropDownBar = () => {
-    return (
-      <select name="cars" id="cars">
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
-      </select>
-    );
-  };
-  const onFavouriteButtonClicked = () => {
-    const favouritePokemonList = pokemonList.slice(0, 2);
-    setPokemonList(favouritePokemonList);
-  };
+   const onShowAllButtonClicked = () => {
+     setFilterView("show-all");
+     setFilteredPokemonList(pokemonList);
+   };
+  
+   const onShowOneButtonClicked = () => {
+     const favouritePokemonList = pokemonList.slice(0, 1);
+     setFilterView("show-one");
+     setFilteredPokemonList(favouritePokemonList);
+   };
 
   const getFavouritesButton = () => {
     return (
-      <button className="favourite-btn" onClick={onFavouriteButtonClicked}>
+      <button
+        className="filter-btn"
+        onClick={onFavouriteButtonClicked}
+      >
         {" "}
-        Favourite Pokemons{" "}
+        Show Favourite Pokemons Only{" "}
+      </button>
+    );
+  };
+
+  const getShowAllButton = () => {
+    return (
+      <button className="filter-btn" onClick={onShowAllButtonClicked}>
+        {" "}
+        Show All Pokemon{" "}
+      </button>
+    );
+  };
+
+  const showOnlyOnePokemon = () => {
+    return (
+      <button className="filter-btn" onClick={onShowOneButtonClicked}>
+        {" "}
+        Show Selected Pokemon{" "}
       </button>
     );
   };
 
   const getPokeMons = () => {
-    return pokemonList.map((item) => (
-      <PokemonCard key={item.name} pokemonData={item} />
+    return filteredPokemonList.map((item) => (
+      <PokemonCard key={item.name} name pokemonData={item} />
     ));
   };
+
+  const onOptionClick = (e) => {
+    setActivePokemonData(e.target.value);
+    setFilterView("show-one");
+    const favouritePokemonList = pokemonList.slice(0, 1);
+    setFilteredPokemonList(favouritePokemonList);
+  }
+
+  const getDropDownOptions = () => {
+    return pokemonURLList.map((pokemonObj) => (
+      <option key={pokemonObj.name} value={pokemonObj.name}>
+        {pokemonObj.name}
+      </option>
+    ));
+  }
+
+  const getOnePokemonSelector = () => {
+    // Early return.
+    if (filterView !== "show-one")
+      return;
+    return (
+      <div className="select-pokemon">
+        <select
+          className="selection"
+          name="pokemon"
+          id="pokemon"
+          onChange={onOptionClick}
+        >
+          {getDropDownOptions()}
+        </select>
+      </div>
+    );
+  }
 
   return (
     <div className="body-container">
       <div className="DropDown-Bar">
-        {getDropDownBar()}
-        {getDropDownBar1()}
-
+        {showOnlyOnePokemon()}
+        {getShowAllButton()}
         {getFavouritesButton()}
       </div>
       <div className="pokemon-list-container">
+        {getOnePokemonSelector()}
         <div className="pokemon-cars">{getPokeMons()}</div>
       </div>
     </div>

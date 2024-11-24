@@ -34,12 +34,15 @@
   text-align: center;
   padding: 10px;
   cursor: pointer;
-  background: pink;
+  background: #ef4b5f;
   border-radius: 20px;
   font-weight: 600;
 }
 
 .pokemon-details {
-  font-size: 20px;
-  font-weight: 500;
+    display: flex;
+    font-size: 20px;
+    font-weight: 500;
+    flex-direction: column;
+    gap: 20px;
 }
