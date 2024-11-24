@@ -8,19 +8,3 @@
   min-height: max-content;
   margin: 10px 0px;
 }
-.pokemon-list-container .pokemon-cars {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  padding: 10px;
-  gap: 10px;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-}
-
-.pokemon-list-container .pokemon-card {
-  min-width: max-content;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 1px solid black;
-  margin: 5px;
-}

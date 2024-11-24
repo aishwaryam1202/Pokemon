@@ -1,5 +1,7 @@
 import React from "react";
 import "../Css/Body.css";
+import PokemonCard from './PokemonCard';
+import {dummyJSON} from "./DummyJSON";
 
 /**
  *
@@ -21,22 +23,14 @@ const getDropDownBar = () => {
   );
 };
 
-const getPokemonCard = () => {
-  return (
-    <div className="pokemon-card">
-      <img
-        className="logo"
-        style={{ height: 300, width: 200 }}
-        src="https://images.immediate.co.uk/production/volatile/sites/3/2024/05/How-many-Pokemon-are-there-6434211.jpg"
-      />
-      <div>
-        <div>PICACHOO</div>
-        <div>CLIMB , RUN</div>
-        <div>56 grms</div>
-      </div>
-    </div>
-  );
-};
+const iterateme = () => {
+  const a = [
+    1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+  ];
+  const b = a.map((item) => <PokemonCard key ={item} pokemonData={dummyJSON} />);
+  return b;
+}
+
 
 const Body = () => {
   return (
@@ -44,26 +38,7 @@ const Body = () => {
       <div className="DropDown-Bar">{getDropDownBar()}</div>
       <div className="pokemon-list-container">
         <div className="pokemon-cars">
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
-          {getPokemonCard()}
+          {iterateme()}
         </div>
       </div>
     </div>
