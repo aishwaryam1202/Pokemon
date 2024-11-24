@@ -1,7 +1,6 @@
 .pokemon-list-container .pokemon-cars {
   display: grid;
   grid-template-columns: auto auto auto;
-  padding: 10px;
   gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
@@ -11,11 +10,36 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  border: 1px solid black;
-  margin: 5px;
+  height: 300px;
+  justify-content: space-evenly;
 }
 
-.pokemon-list-container .pokemon-card  .pokemon-card-pic {
-  height: 300px;
+.pokemon-list-container .pokemon-card .pokemon-card-pic {
+  height: 250px;
   width: 200px;
+}
+
+.pokemon-card-container {
+  border-radius: 20px;
+  background-color: white;
+  border: 3px solid #fff;
+  margin: 10px;
+  box-shadow: 8px 8px;
+}
+
+.pokemon-card-container:hover {
+  border: 3px solid black;
+}
+.add-fav-btn {
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  background: pink;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.pokemon-details {
+  font-size: 20px;
+  font-weight: 500;
 }

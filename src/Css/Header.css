@@ -1,8 +1,12 @@
 .header {
-  display: flex;
+  height: 350px;
+  width: 100%;
   justify-content: space-between;
-  border: 1px solid black;
   align-items: center;
+  background-repeat: no-repeat;
+  background-image: url(https://www.impericon.com/cdn/shop/collections/20161101_pokemon_mobile_2x_0e5e6082-2584-43d3-aba2-6f51082fee6a.jpg?v=1720177600);
+  margin: auto;
+  background-position: center;
 }
 .header .logo {
   height: 150px;

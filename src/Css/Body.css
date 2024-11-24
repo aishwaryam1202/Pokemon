@@ -1,10 +1,26 @@
 .pokemon-list-container {
-  border: 1px solid #000;
   padding: 10px;
+  background-color: lightgray;
+  margin: 0px 107px;
 }
 
 .DropDown-Bar {
-  width: 100px;
+  width: calc(100% - 216px);
   min-height: max-content;
-  margin: 10px 0px;
+  margin: 10px 107px;
+  display: flex;
+  gap: 30px;
+  height: max-content;
+  justify-content: space-between;
+}
+
+.visible-pokemon {
+  cursor: pointer;
+  font-size: 50px;
+}
+
+.DropDown-Bar .favourite-btn {
+  cursor: pointer;
+  margin: 10px 20px;
+  padding: 10px;
 }
