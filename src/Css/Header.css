@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+  align-items: center;
+}
+.header .logo {
+  height: 150px;
+  width: 250px;
+  background-color: #f0f0f0;
+}
+
+.header .title-container {
+  font-size: 30px;
+  color: yellow;
+  background-color: darkblue;
+}
+
+.header .pokemon-pic .title-pokemon-pic {
+  height: 150px;
+  width: 250px;
+  background-color: #f0f0f0;
+}
