@@ -5,6 +5,8 @@ Welcome to the **Pokémon Explorer**! This project is a web application where yo
 ## Live Demo
 
 You can check out the live version of the app here: [Pokémon Explorer](https://aishwaryam1202.github.io/Pokemon/)
+
+
 ![image](https://github.com/user-attachments/assets/cca72fd4-e9c3-458b-8a59-e10f4e7dba13)
 
 
