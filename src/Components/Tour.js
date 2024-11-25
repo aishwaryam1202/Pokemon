@@ -3,45 +3,53 @@ import "driver.js/dist/driver.css";
 
 export const PokemonTourSteps = [
   {
+    id: "0",
+    title: "Welcome to the Pokémon World",
+    text: "Explore and manage your favorite Pokémon! Let me guide you through the features of this app.",
+    position: "right",
+    elementId: "",
+  },
+  {
     id: "1",
-    title: "Show Selected Pokemon",
-    text: "On Clicking, Shows the details of the selected pokemon",
+    title: "View Selected Pokémon",
+    text: "Click here to see detailed information about the Pokémon you've selected.",
     position: "right",
     elementId: "show-one",
   },
   {
     id: "2",
-    title: "Select Pokemon To Show",
-    text: "On Clicking, You will find a list of pokemons. Select a pokemon to see its abilities, height, weight",
+    title: "Choose a Pokémon to Explore",
+    text: "Click here to browse a list of Pokémon. Select one to view its abilities, height, and weight.",
     position: "right",
     elementId: "select-pokemon",
   },
   {
     id: "3",
-    title: "Show All Pokemons",
-    text: "On Clicking, shows the details of the all the pokemons available",
+    title: "View All Pokémon",
+    text: "Click here to see details of all available Pokémon in the app.",
     position: "right",
     elementId: "show-all",
   },
   {
     id: "4",
-    title: "Add Pokemon To Favourite List",
-    text: "On clicking, it sdds the pokemon to Favourite List ",
+    title: "Add Pokémon to Favorites",
+    text: "Click here to add a Pokémon to your favorites list for quick access later.",
     position: "right",
     elementId: "add-fav-pokemon",
   },
   {
-    id: "4",
-    title: "Show Favourite Pokemon",
-    text: "On Clicking, shows the details of the all the favourite pokemons",
+    id: "5", // Fixed duplicate ID issue
+    title: "View Favorite Pokémon",
+    text: "Click here to see all the Pokémon you have added to your favorites.",
     position: "right",
     elementId: "favourites",
   },
 ];
+
 export const getTourSteps = (tourSteps) => {
   return tourSteps.map((tourPopUp) => {
     const element = document.getElementById(tourPopUp.elementId);
-    console.log('element: ', element);
+    console.log("element: ", element);
     return {
       element,
       popover: {

@@ -135,15 +135,15 @@ const Body = () => {
   const getPokeMons = () => {
     if (filteredPokemonList.length)
       return filteredPokemonList.map((item) => (
-          <PokemonCard
-            key={item}
-            pokemonName={item}
-            url={pokemonURLList[item]}
-            pokemonData={item}
-            updateCollectedPokemonDetails={updateCollectedPokemon}
-            pokemonList={pokemonList}
-            addToFavourite={onAddToFavourite}
-          />
+        <PokemonCard
+          key={item}
+          pokemonName={item}
+          url={pokemonURLList[item]}
+          pokemonData={item}
+          updateCollectedPokemonDetails={updateCollectedPokemon}
+          pokemonList={pokemonList}
+          addToFavourite={onAddToFavourite}
+        />
       ));
     else {
       return <div>Select Pokemon's to Display</div>;
@@ -189,7 +189,10 @@ const Body = () => {
       </div>
       <div className="pokemon-list-container">
         {getOnePokemonSelector()}
-        <div className="pokemon-cars" id="add-fav-pokemon"> {getPokeMons()}</div>
+        <div className="pokemon-cars" id="add-fav-pokemon">
+          {" "}
+          {getPokeMons()}
+        </div>
       </div>
     </div>
   );
