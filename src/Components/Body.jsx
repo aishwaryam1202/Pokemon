@@ -25,6 +25,8 @@ const Body = () => {
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
   const [favouritePokemonList, setFavouritePokemonList] = useState(new Set());
   const [filterView, setFilterView] = useState("show-one");
+  const [isFavouriteButtonDisable, setIsFavouriteButtonDisable] =
+    useState(favouritePokemonList.size === 0);
 
   const fetchUserDetails = async () => {
     try {
@@ -64,12 +66,19 @@ const Body = () => {
   };
 
   const onShowOneButtonClicked = () => {
+    setFilteredPokemonList([Object.keys(pokemonURLList)[0]]);
     setFilterView("show-one");
   };
 
   const getFavouritesButton = () => {
     return (
-      <button className="filter-btn" onClick={onFavouriteButtonClicked}>
+      <button
+        className={
+          filterView === "favourites" ? "filter-btn selected" : "filter-btn"
+        }
+        disabled={isFavouriteButtonDisable}
+        onClick={onFavouriteButtonClicked}
+      >
         {" "}
         Show Favourite Pokemons Only{" "}
       </button>
@@ -78,7 +87,12 @@ const Body = () => {
 
   const getShowAllButton = () => {
     return (
-      <button className="filter-btn" onClick={onShowAllButtonClicked}>
+      <button
+        className={
+          filterView === "show-all" ? "filter-btn selected" : "filter-btn"
+        }
+        onClick={onShowAllButtonClicked}
+      >
         {" "}
         Show All Viewed Pokemon{" "}
       </button>
@@ -87,7 +101,12 @@ const Body = () => {
 
   const showOnlyOnePokemon = () => {
     return (
-      <button className="filter-btn" onClick={onShowOneButtonClicked}>
+      <button
+        className={
+          filterView === "show-one" ? "filter-btn selected" : "filter-btn"
+        }
+        onClick={onShowOneButtonClicked}
+      >
         {" "}
         Show Selected Pokemon{" "}
       </button>
@@ -104,20 +123,27 @@ const Body = () => {
     const updatedFavouritePokemonList = favouritePokemonList;
     updatedFavouritePokemonList.add(pokemonName);
     setFavouritePokemonList(updatedFavouritePokemonList);
+    setIsFavouriteButtonDisable(false);
   };
 
   const getPokeMons = () => {
-    return filteredPokemonList.map((item) => (
-      <PokemonCard
-        key={item}
-        pokemonName={item}
-        url={pokemonURLList[item]}
-        pokemonData={item}
-        updateCollectedPokemonDetails={updateCollectedPokemon}
-        pokemonList={pokemonList}
-        addToFavourite={onAddToFavourite}
-      />
-    ));
+    if (filteredPokemonList.length)
+      return filteredPokemonList.map((item) => (
+        <PokemonCard
+          key={item}
+          pokemonName={item}
+          url={pokemonURLList[item]}
+          pokemonData={item}
+          updateCollectedPokemonDetails={updateCollectedPokemon}
+          pokemonList={pokemonList}
+          addToFavourite={onAddToFavourite}
+        />
+      ));
+    else {
+      return <div>
+        Select Pokemon's to Display
+      </div>
+    }
   };
 
   const onOptionClick = (e) => {
