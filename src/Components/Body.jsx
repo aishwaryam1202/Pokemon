@@ -2,6 +2,7 @@ import React from "react";
 import "../Css/Body.css";
 import PokemonCard from "./PokemonCard";
 import { useState, useEffect } from "react";
+import { initTourGuide, PokemonTourSteps } from "./Tour";
 
 /**
  *
@@ -25,8 +26,9 @@ const Body = () => {
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
   const [favouritePokemonList, setFavouritePokemonList] = useState(new Set());
   const [filterView, setFilterView] = useState("show-one");
-  const [isFavouriteButtonDisable, setIsFavouriteButtonDisable] =
-    useState(favouritePokemonList.size === 0);
+  const [isFavouriteButtonDisable, setIsFavouriteButtonDisable] = useState(
+    favouritePokemonList.size === 0
+  );
 
   const fetchUserDetails = async () => {
     try {
@@ -53,6 +55,7 @@ const Body = () => {
     };
 
     callFetchUserDetails();
+    initTourGuide(PokemonTourSteps);
   }, []);
 
   const onFavouriteButtonClicked = () => {
@@ -73,6 +76,7 @@ const Body = () => {
   const getFavouritesButton = () => {
     return (
       <button
+        id="favourites"
         className={
           filterView === "favourites" ? "filter-btn selected" : "filter-btn"
         }
@@ -88,6 +92,7 @@ const Body = () => {
   const getShowAllButton = () => {
     return (
       <button
+        id="show-all"
         className={
           filterView === "show-all" ? "filter-btn selected" : "filter-btn"
         }
@@ -102,6 +107,7 @@ const Body = () => {
   const showOnlyOnePokemon = () => {
     return (
       <button
+        id="show-one"
         className={
           filterView === "show-one" ? "filter-btn selected" : "filter-btn"
         }
@@ -129,20 +135,18 @@ const Body = () => {
   const getPokeMons = () => {
     if (filteredPokemonList.length)
       return filteredPokemonList.map((item) => (
-        <PokemonCard
-          key={item}
-          pokemonName={item}
-          url={pokemonURLList[item]}
-          pokemonData={item}
-          updateCollectedPokemonDetails={updateCollectedPokemon}
-          pokemonList={pokemonList}
-          addToFavourite={onAddToFavourite}
-        />
+          <PokemonCard
+            key={item}
+            pokemonName={item}
+            url={pokemonURLList[item]}
+            pokemonData={item}
+            updateCollectedPokemonDetails={updateCollectedPokemon}
+            pokemonList={pokemonList}
+            addToFavourite={onAddToFavourite}
+          />
       ));
     else {
-      return <div>
-        Select Pokemon's to Display
-      </div>
+      return <div>Select Pokemon's to Display</div>;
     }
   };
 
@@ -165,9 +169,9 @@ const Body = () => {
     return (
       <div className="select-pokemon">
         <select
+          id="select-pokemon"
           className="selection"
           name="pokemon"
-          id="pokemon"
           onChange={onOptionClick}
         >
           {getDropDownOptions()}
@@ -185,7 +189,7 @@ const Body = () => {
       </div>
       <div className="pokemon-list-container">
         {getOnePokemonSelector()}
-        <div className="pokemon-cars">{getPokeMons()}</div>
+        <div className="pokemon-cars" id="add-fav-pokemon"> {getPokeMons()}</div>
       </div>
     </div>
   );

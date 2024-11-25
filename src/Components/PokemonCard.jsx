@@ -47,7 +47,7 @@ const PokemonCard = (props) => {
   const ability = abilities?.map((abilityObj) => abilityObj.ability.name);
   const imgUrl = sprites?.other?.showdown?.front_default;
   return (
-    <div className="pokemon-card-container">
+    <div className="pokemon-card-container" >
       <div className="pokemon-card">
         <img
           className="pokemon-card-pic"

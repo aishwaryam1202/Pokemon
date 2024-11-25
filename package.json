@@ -24,6 +24,7 @@
     "url": "https://github.com/aishwaryam1202/Pokemon/issues"
   },
   "dependencies": {
+    "driver.js": "^1.3.1",
     "parcel": "^2.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
