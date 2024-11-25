@@ -1,5 +1,5 @@
 .body-container {
-  font-family: 'Pokemon Solid', sans-serif;
+  font-family: "Pokemon Solid", sans-serif;
   font-weight: 400;
 }
 
@@ -21,24 +21,24 @@
 }
 
 .DropDown-Bar .filter-btn {
-    cursor: pointer;
-    margin: 10px 20px;
-    padding: 10px;
-    font-family: 'Pokemon Solid', sans-serif;
-    background: #f5ce18;
+  cursor: pointer;
+  margin: 10px 20px;
+  padding: 10px;
+  font-family: "Pokemon Solid", sans-serif;
+  background: #f5ce18;
 }
 
 .select-pokemon {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    height: 100px;
-  }
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 100px;
+}
 
-.select-pokemon  .selection{
-    width: 70%;
-    height: 30px;
-    font-size: 20px;
-    font-weight: 700;
-    border-radius: 10px;
+.select-pokemon .selection {
+  width: 70%;
+  height: 30px;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 10px;
 }

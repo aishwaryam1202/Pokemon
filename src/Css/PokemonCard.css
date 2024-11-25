@@ -40,9 +40,9 @@
 }
 
 .pokemon-details {
-    display: flex;
-    font-size: 20px;
-    font-weight: 500;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  flex-direction: column;
+  gap: 20px;
 }

@@ -17,14 +17,12 @@ import { useState, useEffect } from "react";
  * show-one
  * show-all
  * favourites
- * 
  */
 
 const Body = () => {
-  const [pokemonList, setPokemonList] = useState([]);
-  const [pokemonURLList, setPokemonURLList] = useState([])
+  const [pokemonList, setPokemonList] = useState({});
+  const [pokemonURLList, setPokemonURLList] = useState({});
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
-  const [activePokemonData, setActivePokemonData] = useState("");
   const [filterView, setFilterView] = useState("show-one");
 
   const fetchUserDetails = async () => {
@@ -34,20 +32,11 @@ const Body = () => {
         throw new Error("Failed to fetch URLs");
       }
       const urls = await urlsResponse.json();
-      setPokemonURLList(urls.results);
-
-      const fetchPromises = urls.results.map(({ url }) =>
-        fetch(url).then((response) => {
-          if (!response.ok) {
-            throw new Error(`Failed to fetch data from ${url}`);
-          }
-          return response.json();
-        })
-      );
-
-      const results = await Promise.all(fetchPromises);
-
-      return results;
+      const pokemonNameUrlObj = {};
+      urls.results.forEach((pokemonDetail) => {
+        pokemonNameUrlObj[pokemonDetail.name] = pokemonDetail.url;
+      });
+      return pokemonNameUrlObj;
     } catch (error) {
       console.error("Error:", error);
     }
@@ -56,36 +45,30 @@ const Body = () => {
   useEffect(() => {
     const callFetchUserDetails = async () => {
       const results = await fetchUserDetails();
-      setPokemonList(results);
-      setFilteredPokemonList(results);
+      setPokemonURLList(results);
+      setFilteredPokemonList([Object.keys(results)[0]]);
     };
 
     callFetchUserDetails();
   }, []);
 
   const onFavouriteButtonClicked = () => {
-    const favouritePokemonList = pokemonList.slice(0,2 );
+    setFilteredPokemonList(Object.keys(pokemonList).slice(0, 2));
     setFilterView("favourites");
-    setFilteredPokemonList(favouritePokemonList);
   };
 
-   const onShowAllButtonClicked = () => {
-     setFilterView("show-all");
-     setFilteredPokemonList(pokemonList);
-   };
-  
-   const onShowOneButtonClicked = () => {
-     const favouritePokemonList = pokemonList.slice(0, 1);
-     setFilterView("show-one");
-     setFilteredPokemonList(favouritePokemonList);
-   };
+  const onShowAllButtonClicked = () => {
+    setFilteredPokemonList(Object.keys(pokemonList));
+    setFilterView("show-all");
+  };
+
+  const onShowOneButtonClicked = () => {
+    setFilterView("show-one");
+  };
 
   const getFavouritesButton = () => {
     return (
-      <button
-        className="filter-btn"
-        onClick={onFavouriteButtonClicked}
-      >
+      <button className="filter-btn" onClick={onFavouriteButtonClicked}>
         {" "}
         Show Favourite Pokemons Only{" "}
       </button>
@@ -96,7 +79,7 @@ const Body = () => {
     return (
       <button className="filter-btn" onClick={onShowAllButtonClicked}>
         {" "}
-        Show All Pokemon{" "}
+        Show All Viewed Pokemon{" "}
       </button>
     );
   };
@@ -110,31 +93,41 @@ const Body = () => {
     );
   };
 
+  const updateCollectedPokemon = (pokemonName, pokemonDetails) => {
+    const newPokeMonList = pokemonList;
+    newPokeMonList[pokemonName] = pokemonDetails;
+    setPokemonList(newPokeMonList);
+  };
+
   const getPokeMons = () => {
     return filteredPokemonList.map((item) => (
-      <PokemonCard key={item.name} name pokemonData={item} />
+      <PokemonCard
+        key={item}
+        pokemonName={item}
+        url={pokemonURLList[item]}
+        pokemonData={item}
+        updateCollectedPokemonDetails={updateCollectedPokemon}
+        pokemonList={pokemonList}
+      />
     ));
   };
 
   const onOptionClick = (e) => {
-    setActivePokemonData(e.target.value);
     setFilterView("show-one");
-    const favouritePokemonList = pokemonList.slice(0, 1);
-    setFilteredPokemonList(favouritePokemonList);
-  }
+    setFilteredPokemonList([e.target.value]);
+  };
 
   const getDropDownOptions = () => {
-    return pokemonURLList.map((pokemonObj) => (
-      <option key={pokemonObj.name} value={pokemonObj.name}>
-        {pokemonObj.name}
+    return Object.keys(pokemonURLList).map((pokemonName) => (
+      <option key={pokemonName} value={pokemonName}>
+        {pokemonName}
       </option>
     ));
-  }
+  };
 
   const getOnePokemonSelector = () => {
     // Early return.
-    if (filterView !== "show-one")
-      return;
+    if (filterView !== "show-one") return;
     return (
       <div className="select-pokemon">
         <select
@@ -147,7 +140,7 @@ const Body = () => {
         </select>
       </div>
     );
-  }
+  };
 
   return (
     <div className="body-container">
