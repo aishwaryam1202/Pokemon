@@ -14,6 +14,7 @@ You can check out the live version of the app here: [Pokémon Explorer](https://
 - **Detailed View:** Click on a Pokémon to view its abilities, height, weight, and other stats.
 - **Favorites Management:** Add your favorite Pokémon to a dedicated list for easy access.
 - **Interactive Tour:** A guided tour of the application using **driver.js** to help new users understand the features.
+- **Caching Mechanism:** Avoid unnecessary API calls by caching details of already fetched Pokémon for faster and efficient performance.
 - **Responsive Design:** Built using modern web technologies to ensure a seamless experience across devices.
 
 ---
@@ -35,3 +36,4 @@ If you'd like to run this project locally, follow these steps:
 1. **Clone the Repository:**
    ```bash
    git clone https://github.com/aishwaryam1202/Pokemon.git
+   cd Pokemon
