@@ -2,8 +2,13 @@ import "../Css/PokemonCard.css";
 import { useEffect, useState } from "react";
 
 const PokemonCard = (props) => {
-  const { pokemonName, url, updateCollectedPokemonDetails, pokemonList } =
-    props;
+  const {
+    pokemonName,
+    url,
+    updateCollectedPokemonDetails,
+    pokemonList,
+    addToFavourite,
+  } = props;
   const [activePokemonData, setActivePokemonData] = useState({});
 
   const fetchPokemonDetail = async (url) => {
@@ -30,6 +35,10 @@ const PokemonCard = (props) => {
     callFetchUserDetails();
   }, []);
 
+  const onFavouriteButtonClicked = () => {
+    addToFavourite(pokemonName);
+  };
+
   if (activePokemonData && Object.keys(activePokemonData) === 0) {
     return <></>;
   }
@@ -53,7 +62,9 @@ const PokemonCard = (props) => {
           <div>{height} cms</div>
         </div>
       </div>
-      <div className="add-fav-btn">Add to Favourites</div>
+      <div className="add-fav-btn" onClick={onFavouriteButtonClicked}>
+        Add to Favourites
+      </div>
     </div>
   );
 };

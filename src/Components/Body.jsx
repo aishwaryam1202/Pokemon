@@ -23,6 +23,7 @@ const Body = () => {
   const [pokemonList, setPokemonList] = useState({});
   const [pokemonURLList, setPokemonURLList] = useState({});
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
+  const [favouritePokemonList, setFavouritePokemonList] = useState(new Set());
   const [filterView, setFilterView] = useState("show-one");
 
   const fetchUserDetails = async () => {
@@ -53,12 +54,12 @@ const Body = () => {
   }, []);
 
   const onFavouriteButtonClicked = () => {
-    setFilteredPokemonList(Object.keys(pokemonList).slice(0, 2));
+    setFilteredPokemonList([...favouritePokemonList]);
     setFilterView("favourites");
   };
 
   const onShowAllButtonClicked = () => {
-    setFilteredPokemonList(Object.keys(pokemonList));
+    setFilteredPokemonList(Object.keys(pokemonURLList));
     setFilterView("show-all");
   };
 
@@ -99,6 +100,12 @@ const Body = () => {
     setPokemonList(newPokeMonList);
   };
 
+  const onAddToFavourite = (pokemonName) => {
+    const updatedFavouritePokemonList = favouritePokemonList;
+    updatedFavouritePokemonList.add(pokemonName);
+    setFavouritePokemonList(updatedFavouritePokemonList);
+  };
+
   const getPokeMons = () => {
     return filteredPokemonList.map((item) => (
       <PokemonCard
@@ -108,6 +115,7 @@ const Body = () => {
         pokemonData={item}
         updateCollectedPokemonDetails={updateCollectedPokemon}
         pokemonList={pokemonList}
+        addToFavourite={onAddToFavourite}
       />
     ));
   };
