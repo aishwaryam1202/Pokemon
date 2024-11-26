@@ -63,7 +63,7 @@ const Body = () => {
     };
 
     callFetchUserDetails();
-    // initTourGuide(PokemonTourSteps);
+    initTourGuide(PokemonTourSteps);
   }, []);
 
   const onFavouriteButtonClicked = () => {
@@ -232,7 +232,7 @@ const Body = () => {
       <div className="pokemon-list-container">
         {getSearchPokemonInput()}
         {getOnePokemonSelector()}
-        <div className="pokemon-cars" id="add-fav-pokemon">
+        <div className={filterView === "show-one" ? "show-one-pokemon" :"pokemon-cars"} id="add-fav-pokemon">
           {" "}
           {getPokeMons()}
         </div>
