@@ -1,0 +1,19 @@
+.search-pokemon {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+  width: 100%;
+
+}
+
+.search-pokemon .search-pokemon-container {
+  width: 80%;
+}
+
+.search-pokemon .search-pokemon-container .search-input-box {
+    align-items: center;
+    width: 80%;
+    margin: 0px 10px;
+}

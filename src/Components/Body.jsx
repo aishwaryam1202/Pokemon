@@ -3,6 +3,7 @@ import "../Css/Body.css";
 import PokemonCard from "./PokemonCard";
 import { useState, useEffect } from "react";
 import { initTourGuide, PokemonTourSteps } from "./Tour";
+import SearchPokemon from "./SearchPokemon";
 
 /**
  *
@@ -21,11 +22,19 @@ import { initTourGuide, PokemonTourSteps } from "./Tour";
  */
 
 const Body = () => {
+  // contains all fetch pokemon with its details.
   const [pokemonList, setPokemonList] = useState({});
+  // constain all the pokemon details with it URL
   const [pokemonURLList, setPokemonURLList] = useState({});
+  // contain what pokemon to be displayed
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
+  // contain a list of favourite pokemon
   const [favouritePokemonList, setFavouritePokemonList] = useState(new Set());
+  // denotes current filter view state 
   const [filterView, setFilterView] = useState("show-one");
+  // denotes if the favorite button enabled
+  const [favButtonEnabled, setFavButtonEnabled] =
+    useState(favouritePokemonList.size !== 0);
 
   const fetchUserDetails = async () => {
     try {
@@ -79,7 +88,7 @@ const Body = () => {
         className={
           filterView === "favourites" ? "filter-btn selected" : "filter-btn"
         }
-        disabled={favouritePokemonList.size === 0}
+        disabled={!favButtonEnabled}
         onClick={onFavouriteButtonClicked}
       >
         {" "}
@@ -134,6 +143,10 @@ const Body = () => {
       updatedFavouritePokemonList.delete(pokemonName);
       setFavouritePokemonList(updatedFavouritePokemonList);
     }
+
+    if (updatedFavouritePokemonList.size !== 0) setFavButtonEnabled(true)
+    else setFavButtonEnabled(false);
+    
     if (filterView === "favourites") {
       setFilteredPokemonList([...updatedFavouritePokemonList]);
     }
@@ -154,7 +167,11 @@ const Body = () => {
         />
       ));
     else {
-      return <div>Select Pokemon's to Display</div>;
+      return (
+        <div className="no-pokemon-container">
+          No Pokémon found. Try a different filter or remove the current one.
+        </div>
+      );
     }
   };
 
@@ -170,6 +187,23 @@ const Body = () => {
       </option>
     ));
   };
+  const onSearchTextUpdate = (searchText) => {
+    const allPokemonNames = Object.keys(pokemonURLList);
+    if (searchText === "") {
+      setFilteredPokemonList(allPokemonNames);
+      return;
+    }
+    const searchTextFilteredPokemon = allPokemonNames.filter((pokemonName) =>
+      pokemonName.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredPokemonList(searchTextFilteredPokemon);
+  }
+
+    const getSearchPokemonInput = () => {
+      // Early return.
+      if (filterView !== "show-all") return;
+      return <SearchPokemon updateSearchText={onSearchTextUpdate} />;
+    };
 
   const getOnePokemonSelector = () => {
     // Early return.
@@ -196,6 +230,7 @@ const Body = () => {
         {getFavouritesButton()}
       </div>
       <div className="pokemon-list-container">
+        {getSearchPokemonInput()}
         {getOnePokemonSelector()}
         <div className="pokemon-cars" id="add-fav-pokemon">
           {" "}

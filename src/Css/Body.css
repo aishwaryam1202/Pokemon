@@ -50,3 +50,12 @@
   font-weight: 700;
   border-radius: 10px;
 }
+
+.no-pokemon-container {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  width: max-content;
+  margin: 0% 50%;
+  min-width: 600px;
+}
