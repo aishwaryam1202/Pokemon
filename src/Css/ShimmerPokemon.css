@@ -1,0 +1,34 @@
+.shimmer-pokemon-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 300px;
+  justify-content: space-evenly;
+  writing-mode: space-evenly;
+  background-color: #f0f0f0;
+  width: max-content;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.shimmer-pokemon-card .shimmer-pokemon-pic {
+  height: 250px;
+  width: 200px;
+  background-color: #909090;
+  border-radius: 20px;
+}
+
+.shimmer-pokemon-card .shimmer-pokemon-details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 200px;
+  border-radius: 20px;
+}
+
+.shimmer-pokemon-card .shimmer-pokemon-details .shimmer-pokemon-detail {
+  height: 20px;
+  width: 150px;
+  border-radius: 20px;
+  background-color: #909090;
+}

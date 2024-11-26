@@ -51,7 +51,9 @@ const Body = () => {
     const callFetchUserDetails = async () => {
       const results = await fetchUserDetails();
       setPokemonURLList(results);
-      setFilteredPokemonList([Object.keys(results)[0]]);
+      filterView === "show-all"
+        ? setFilteredPokemonList(Object.keys(results))
+        : setFilteredPokemonList([Object.keys(results)[0]]);
     };
 
     callFetchUserDetails();

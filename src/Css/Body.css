@@ -26,12 +26,14 @@
   padding: 10px;
   font-family: "Trebuchet MS", sans-serif;
   background: #f5ce18;
+  box-shadow: none;
 }
 
 .DropDown-Bar .selected {
   border-bottom: 4px solid black;
   font-size: 15px;
   font-weight: 800;
+  box-shadow: 5px 5px;
 }
 
 .select-pokemon {

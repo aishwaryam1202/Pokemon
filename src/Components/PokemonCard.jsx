@@ -1,5 +1,6 @@
 import "../Css/PokemonCard.css";
 import { useEffect, useState } from "react";
+import ShimmerPokemonCard from "./ShimmerPokemonCard";
 
 const PokemonCard = (props) => {
   const {
@@ -39,8 +40,9 @@ const PokemonCard = (props) => {
     addToFavourite(pokemonName);
   };
 
-  if (activePokemonData && Object.keys(activePokemonData) === 0) {
-    return <></>;
+  // Conditional Rendering of Shimmer UI for better UX.
+  if (Object.keys(activePokemonData).length === 0) {
+    return <ShimmerPokemonCard />;
   }
 
   const { abilities, height, weight, sprites, id, name } = activePokemonData;
