@@ -26,9 +26,6 @@ const Body = () => {
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
   const [favouritePokemonList, setFavouritePokemonList] = useState(new Set());
   const [filterView, setFilterView] = useState("show-one");
-  const [isFavouriteButtonDisable, setIsFavouriteButtonDisable] = useState(
-    favouritePokemonList.size === 0
-  );
 
   const fetchUserDetails = async () => {
     try {
@@ -57,7 +54,7 @@ const Body = () => {
     };
 
     callFetchUserDetails();
-    initTourGuide(PokemonTourSteps);
+    // initTourGuide(PokemonTourSteps);
   }, []);
 
   const onFavouriteButtonClicked = () => {
@@ -82,7 +79,7 @@ const Body = () => {
         className={
           filterView === "favourites" ? "filter-btn selected" : "filter-btn"
         }
-        disabled={isFavouriteButtonDisable}
+        disabled={favouritePokemonList.size === 0}
         onClick={onFavouriteButtonClicked}
       >
         {" "}
@@ -127,11 +124,19 @@ const Body = () => {
     setPokemonList(newPokeMonList);
   };
 
-  const onAddToFavourite = (pokemonName) => {
+  const onAddToFavourite = (tasktype, pokemonName) => {
     const updatedFavouritePokemonList = favouritePokemonList;
-    updatedFavouritePokemonList.add(pokemonName);
-    setFavouritePokemonList(updatedFavouritePokemonList);
-    setIsFavouriteButtonDisable(false);
+    if (tasktype === "add") {
+      updatedFavouritePokemonList.add(pokemonName);
+      setFavouritePokemonList(updatedFavouritePokemonList);
+    } 
+    else {
+      updatedFavouritePokemonList.delete(pokemonName);
+      setFavouritePokemonList(updatedFavouritePokemonList);
+    }
+    if (filterView === "favourites") {
+      setFilteredPokemonList([...updatedFavouritePokemonList]);
+    }
   };
 
   const getPokeMons = () => {
@@ -145,6 +150,7 @@ const Body = () => {
           updateCollectedPokemonDetails={updateCollectedPokemon}
           pokemonList={pokemonList}
           addToFavourite={onAddToFavourite}
+          favouritePokemonList={favouritePokemonList}
         />
       ));
     else {

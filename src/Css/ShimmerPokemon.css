@@ -14,7 +14,7 @@
 .shimmer-pokemon-card .shimmer-pokemon-pic {
   height: 250px;
   width: 200px;
-  background-color: #909090;
+  background-color: #90909045;
   border-radius: 20px;
 }
 
@@ -30,5 +30,5 @@
   height: 20px;
   width: 150px;
   border-radius: 20px;
-  background-color: #909090;
+  background-color: #90909045;
 }
