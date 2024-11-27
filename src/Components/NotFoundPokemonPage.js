@@ -1,14 +1,14 @@
-import React from 'react'
-import { useRouteError } from 'react-router-dom'
+import React from "react";
+import { useRouteError } from "react-router-dom";
 
 const NotFoundPokemonPage = () => {
-    const error = useRouteError();
-    const { status, statusText } = error;
-    return (
-      <h1>
-        {status}:{statusText}
-      </h1>
-    );
-}
+  const error = useRouteError();
+  const { status, statusText } = error;
+  return (
+    <h1>
+      {status}:{statusText}
+    </h1>
+  );
+};
 
-export default NotFoundPokemonPage
+export default NotFoundPokemonPage;

@@ -2,6 +2,7 @@ import "../Css/PokemonCard.css";
 import { useEffect, useState } from "react";
 import ShimmerPokemonCard from "./ShimmerPokemonCard";
 import { Link } from "react-router-dom";
+import useFetchData from "../Utils/useFetchData";
 
 const ADD_TO_FAV_TEXT = "Add to Favourites";
 const REM_FROM_FAV_TEXT = "Remove from Favourites";
@@ -15,34 +16,13 @@ const PokemonCard = (props) => {
     addToFavourite,
     favouritePokemonList,
   } = props;
-  const [activePokemonData, setActivePokemonData] = useState({});
+  const activePokemonData = pokemonList[pokemonName]
+    ? pokemonList[pokemonName] || {}
+    : useFetchData(url, pokemonList);
+
   const [favouriteButtonText, setFavouriteButtonText] = useState(
     !favouritePokemonList.has(pokemonName) ? ADD_TO_FAV_TEXT : REM_FROM_FAV_TEXT
   );
-
-  const fetchPokemonDetail = async (url) => {
-    try {
-      const pokemonApiResponse = await fetch(url);
-      if (!pokemonApiResponse.ok) {
-        throw new Error("Failed to fetch pokemonDetail");
-      }
-      const pokemonData = await pokemonApiResponse.json();
-      return pokemonData;
-    } catch (e) {}
-  };
-
-  useEffect(() => {
-    if (pokemonList[pokemonName]) {
-      setActivePokemonData(pokemonList[pokemonName]);
-      return;
-    }
-    const callFetchUserDetails = async () => {
-      const results = await fetchPokemonDetail(url);
-      updateCollectedPokemonDetails(pokemonName, results);
-      setActivePokemonData(results);
-    };
-    callFetchUserDetails();
-  }, []);
 
   const onFavouriteButtonClicked = () => {
     if (favouritePokemonList.has(pokemonName)) {
@@ -67,7 +47,7 @@ const PokemonCard = (props) => {
   return (
     <div className="pokemon-card-container">
       <div className="pokemon-card">
-        <Link to={"Pokemon/"+id}>
+        <Link to={"Pokemon/" + id}>
           <img
             className="pokemon-card-pic"
             style={{ height: 130, width: 130 }}

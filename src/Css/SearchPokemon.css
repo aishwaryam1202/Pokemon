@@ -5,7 +5,6 @@
   flex-direction: column;
   margin: 20px;
   width: 100%;
-
 }
 
 .search-pokemon .search-pokemon-container {
@@ -13,12 +12,12 @@
 }
 
 .search-pokemon .search-pokemon-container .search-input-box {
-    align-items: center;
-    width: 80%;
-    margin: 0px 10px;
-    height: 30px;
+  align-items: center;
+  width: 80%;
+  margin: 0px 10px;
+  height: 30px;
 }
 
 .search-pokemon .search-pokemon-container .search-input-btn {
-    height: 30px;
+  height: 30px;
 }

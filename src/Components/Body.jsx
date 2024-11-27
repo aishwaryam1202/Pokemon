@@ -30,11 +30,12 @@ const Body = () => {
   const [filteredPokemonList, setFilteredPokemonList] = useState([]);
   // contain a list of favourite pokemon
   const [favouritePokemonList, setFavouritePokemonList] = useState(new Set());
-  // denotes current filter view state 
+  // denotes current filter view state
   const [filterView, setFilterView] = useState("show-one");
   // denotes if the favorite button enabled
-  const [favButtonEnabled, setFavButtonEnabled] =
-    useState(favouritePokemonList.size !== 0);
+  const [favButtonEnabled, setFavButtonEnabled] = useState(
+    favouritePokemonList.size !== 0
+  );
 
   const fetchUserDetails = async () => {
     try {
@@ -138,15 +139,14 @@ const Body = () => {
     if (tasktype === "add") {
       updatedFavouritePokemonList.add(pokemonName);
       setFavouritePokemonList(updatedFavouritePokemonList);
-    } 
-    else {
+    } else {
       updatedFavouritePokemonList.delete(pokemonName);
       setFavouritePokemonList(updatedFavouritePokemonList);
     }
 
-    if (updatedFavouritePokemonList.size !== 0) setFavButtonEnabled(true)
+    if (updatedFavouritePokemonList.size !== 0) setFavButtonEnabled(true);
     else setFavButtonEnabled(false);
-    
+
     if (filterView === "favourites") {
       setFilteredPokemonList([...updatedFavouritePokemonList]);
     }
@@ -197,13 +197,13 @@ const Body = () => {
       pokemonName.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredPokemonList(searchTextFilteredPokemon);
-  }
+  };
 
-    const getSearchPokemonInput = () => {
-      // Early return.
-      if (filterView !== "show-all") return;
-      return <SearchPokemon updateSearchText={onSearchTextUpdate} />;
-    };
+  const getSearchPokemonInput = () => {
+    // Early return.
+    if (filterView !== "show-all") return;
+    return <SearchPokemon updateSearchText={onSearchTextUpdate} />;
+  };
 
   const getOnePokemonSelector = () => {
     // Early return.
@@ -232,7 +232,12 @@ const Body = () => {
       <div className="pokemon-list-container">
         {getSearchPokemonInput()}
         {getOnePokemonSelector()}
-        <div className={filterView === "show-one" ? "show-one-pokemon" :"pokemon-cars"} id="add-fav-pokemon">
+        <div
+          className={
+            filterView === "show-one" ? "show-one-pokemon" : "pokemon-cars"
+          }
+          id="add-fav-pokemon"
+        >
           {" "}
           {getPokeMons()}
         </div>

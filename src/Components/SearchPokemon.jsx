@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import '../Css/SearchPokemon.css';
+import { useState } from "react";
+import "../Css/SearchPokemon.css";
 
 const SearchPokemon = (props) => {
   const { updateSearchText } = props;
@@ -29,4 +29,4 @@ const SearchPokemon = (props) => {
   );
 };
 
-export default SearchPokemon;;
+export default SearchPokemon;
