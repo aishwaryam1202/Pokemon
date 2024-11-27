@@ -20,7 +20,10 @@ const SearchPokemon = (props) => {
             setSearchText(e.target.value);
           }}
         />
-        <button onClick={onSearchBtnClicked}> Search</button>
+        <button className="search-input-btn" onClick={onSearchBtnClicked}>
+          {" "}
+          Search
+        </button>
       </div>
     </div>
   );
