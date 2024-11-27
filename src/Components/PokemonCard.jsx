@@ -1,6 +1,7 @@
 import "../Css/PokemonCard.css";
 import { useEffect, useState } from "react";
 import ShimmerPokemonCard from "./ShimmerPokemonCard";
+import { Link } from "react-router-dom";
 
 const ADD_TO_FAV_TEXT = "Add to Favourites";
 const REM_FROM_FAV_TEXT = "Remove from Favourites";
@@ -66,12 +67,14 @@ const PokemonCard = (props) => {
   return (
     <div className="pokemon-card-container">
       <div className="pokemon-card">
-        <img
-          className="pokemon-card-pic"
-          style={{ height: 130, width: 130 }}
-          alt={name}
-          src={imgUrl}
-        />
+        <Link to={"Pokemon/"+id}>
+          <img
+            className="pokemon-card-pic"
+            style={{ height: 130, width: 130 }}
+            alt={name}
+            src={imgUrl}
+          />
+        </Link>
         <div className="pokemon-details">
           <div>{name}</div>
           <div>{ability?.join(",")}</div>
