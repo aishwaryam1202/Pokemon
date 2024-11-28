@@ -4,7 +4,6 @@ import ShimmerPokemonCard from "./ShimmerPokemonCard";
 import { useParams } from "react-router-dom";
 
 const PokemonPage = () => {
-  // const [pokemonData, setPokemonData] = useState(null);
   const { id } = useParams();
   const url = "https://pokeapi.co/api/v2/pokemon/" + id + "/";
 

@@ -8,6 +8,9 @@ const useFetchData = (url) => {
 
   const fetchData = async () => {
     const data = await fetch(url);
+    if (!data.ok) {
+      throw new Error("Failed to fetch data from api");
+    }
     const jsonData = await data.json();
     setFetchedData(jsonData);
   };
