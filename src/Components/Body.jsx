@@ -4,22 +4,8 @@ import PokemonCard from "./PokemonCard";
 import { useState, useEffect } from "react";
 import { initTourGuide, PokemonTourSteps } from "./Tour";
 import SearchPokemon from "./SearchPokemon";
+import { POKEMON_VIEW_TYPE } from './../Constants/PokemonViewConstants';
 
-/**
- *
- * * Body
- * * DropDown Bar
- * * Pokemon Container
- * * * Pokemon Card 1
- * * * Pokemon Card 1
- * * * Pokemon Card 1
- */
-
-/**
- * show-one
- * show-all
- * favourites
- */
 
 const Body = () => {
   // contains all fetch pokemon with its details.
@@ -31,7 +17,7 @@ const Body = () => {
   // contain a list of favourite pokemon
   const [favouritePokemonList, setFavouritePokemonList] = useState(new Set());
   // denotes current filter view state
-  const [filterView, setFilterView] = useState("show-one");
+  const [filterView, setFilterView] = useState(POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON);
   // denotes if the favorite button enabled
   const [favButtonEnabled, setFavButtonEnabled] = useState(
     favouritePokemonList.size !== 0
@@ -58,7 +44,7 @@ const Body = () => {
     const callFetchUserDetails = async () => {
       const results = await fetchUserDetails();
       setPokemonURLList(results);
-      filterView === "show-all"
+      filterView === POKEMON_VIEW_TYPE.VIEW_ALL_POKEMON
         ? setFilteredPokemonList(Object.keys(results))
         : setFilteredPokemonList([Object.keys(results)[0]]);
     };
@@ -69,25 +55,25 @@ const Body = () => {
 
   const onFavouriteButtonClicked = () => {
     setFilteredPokemonList([...favouritePokemonList]);
-    setFilterView("favourites");
+    setFilterView(POKEMON_VIEW_TYPE.VIEW_FAVOURITE_POKEMON);
   };
 
   const onShowAllButtonClicked = () => {
     setFilteredPokemonList(Object.keys(pokemonURLList));
-    setFilterView("show-all");
+    setFilterView(POKEMON_VIEW_TYPE.VIEW_ALL_POKEMON);
   };
 
   const onShowOneButtonClicked = () => {
     setFilteredPokemonList([Object.keys(pokemonURLList)[0]]);
-    setFilterView("show-one");
+    setFilterView(POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON);
   };
 
   const getFavouritesButton = () => {
     return (
       <button
-        id="favourites"
+        id={POKEMON_VIEW_TYPE.VIEW_FAVOURITE_POKEMON}
         className={
-          filterView === "favourites" ? "filter-btn selected" : "filter-btn"
+          filterView === POKEMON_VIEW_TYPE.VIEW_FAVOURITE_POKEMON ? "filter-btn selected" : "filter-btn"
         }
         disabled={!favButtonEnabled}
         onClick={onFavouriteButtonClicked}
@@ -101,9 +87,9 @@ const Body = () => {
   const getShowAllButton = () => {
     return (
       <button
-        id="show-all"
+        id={POKEMON_VIEW_TYPE.VIEW_ALL_POKEMON}
         className={
-          filterView === "show-all" ? "filter-btn selected" : "filter-btn"
+          filterView === POKEMON_VIEW_TYPE.VIEW_ALL_POKEMON ? "filter-btn selected" : "filter-btn"
         }
         onClick={onShowAllButtonClicked}
       >
@@ -116,9 +102,9 @@ const Body = () => {
   const showOnlyOnePokemon = () => {
     return (
       <button
-        id="show-one"
+        id={POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON}
         className={
-          filterView === "show-one" ? "filter-btn selected" : "filter-btn"
+          filterView === POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON ? "filter-btn selected" : "filter-btn"
         }
         onClick={onShowOneButtonClicked}
       >
@@ -147,7 +133,7 @@ const Body = () => {
     if (updatedFavouritePokemonList.size !== 0) setFavButtonEnabled(true);
     else setFavButtonEnabled(false);
 
-    if (filterView === "favourites") {
+    if (filterView === POKEMON_VIEW_TYPE.VIEW_FAVOURITE_POKEMON) {
       setFilteredPokemonList([...updatedFavouritePokemonList]);
     }
   };
@@ -176,7 +162,7 @@ const Body = () => {
   };
 
   const onOptionClick = (e) => {
-    setFilterView("show-one");
+    setFilterView(POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON);
     setFilteredPokemonList([e.target.value]);
   };
 
@@ -201,13 +187,13 @@ const Body = () => {
 
   const getSearchPokemonInput = () => {
     // Early return.
-    if (filterView !== "show-all") return;
+    if (filterView !== POKEMON_VIEW_TYPE.VIEW_ALL_POKEMON) return;
     return <SearchPokemon updateSearchText={onSearchTextUpdate} />;
   };
 
   const getOnePokemonSelector = () => {
     // Early return.
-    if (filterView !== "show-one") return;
+    if (filterView !== POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON) return;
     return (
       <div className="select-pokemon">
         <select
@@ -234,7 +220,7 @@ const Body = () => {
         {getOnePokemonSelector()}
         <div
           className={
-            filterView === "show-one" ? "show-one-pokemon" : "pokemon-cars"
+            filterView === POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON ? "show-one-pokemon" : "pokemon-cars"
           }
           id="add-fav-pokemon"
         >

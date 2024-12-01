@@ -1,5 +1,6 @@
 import { driver } from "driver.js";
 import "driver.js/dist/driver.css";
+import { POKEMON_VIEW_TYPE } from './../Constants/PokemonViewConstants';
 
 export const PokemonTourSteps = [
   {
@@ -14,7 +15,7 @@ export const PokemonTourSteps = [
     title: "View Selected Pokémon",
     text: "Click here to see detailed information about the Pokémon you've selected.",
     position: "right",
-    elementId: "show-one",
+    elementId: POKEMON_VIEW_TYPE.VIEW_ONE_POKEMON,
   },
   {
     id: "2",
@@ -28,7 +29,7 @@ export const PokemonTourSteps = [
     title: "View All Pokémon",
     text: "Click here to see details of all available Pokémon in the app.",
     position: "right",
-    elementId: "show-all",
+    elementId: POKEMON_VIEW_TYPE.VIEW_ALL_POKEMON,
   },
   {
     id: "4",
@@ -42,7 +43,7 @@ export const PokemonTourSteps = [
     title: "View Favorite Pokémon",
     text: "Click here to see all the Pokémon you have added to your favorites.",
     position: "right",
-    elementId: "favourites",
+    elementId: POKEMON_VIEW_TYPE.VIEW_FAVOURITE_POKEMON,
   },
 ];
 
